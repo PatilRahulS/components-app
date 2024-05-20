@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   MaterialReactTable,
-  MRT_ToggleDensePaddingButton,
   MRT_ToggleFullScreenButton,
   MRT_ShowHideColumnsButton,
   MRT_ToggleFiltersButton,
@@ -13,17 +12,14 @@ import { Box, MenuItem, IconButton, Tooltip } from '@mui/material';
 import {
   Delete,
   Edit,
-  List,
   Visibility,
   Settings,
   VisibilityOff,
   VisibilityOutlined,
   DoneAll,
   Close,
-  FactCheck,
-  Key,
 } from '@mui/icons-material';
-import { Button, Input, Label, Spinner } from 'reactstrap';
+import CustomButton from './Button';
 
 const propTypes = {
   columns: PropTypes.array.isRequired,
@@ -305,18 +301,6 @@ const DataTable = ({
     return null;
   };
 
-  const getCustomColumnName = () => {
-    if (type === 'approvals') return 'orderSuppliers';
-    if (type === 'instruction') return 'supplier';
-    return null;
-  };
-
-  const getColumnStatus = () => {
-    if (type === 'clinics') return 'isActive';
-
-    return null;
-  };
-
   const resetGridSessionState = (table) => {
     table.resetSorting(true);
     table.resetColumnFilters(true);
@@ -397,7 +381,6 @@ const DataTable = ({
     maxMultiSortColCount: 3, //prevent more than 3 columns from being sorted at once
     initialState: {
       //   sorting: [
-      //     { id: 'clinicName', desc: false }, //sort by companyName in ascending order by default
       //     { id: 'isActive', desc: true }, //then sort by city in descending order by default
       //     { id: 'supplier', desc: false },
       //   ],
@@ -421,17 +404,26 @@ const DataTable = ({
                 disabled={false}
                 onClick={() => {
                   if (menu.route) {
+                    //navigate from here to any page
                     //  navigate(`${menu.route}/${row.original[getIdColumnKey()]}`);
                   } else {
+                    //return values from here if have to perform any action
                     menu.modalfunc({
                       id: row.original[getIdColumnKey()],
                       name: row.original[getColumnName()],
-                      orderSuppliers: row.original[getCustomColumnName()],
-                      supplier: row.original[getCustomColumnName()],
                     });
                     closeMenu();
                   }
-                }}></MenuItem>
+                }}>
+                <Box
+                  sx={{ display: 'flex', gap: '0.5rem' }}
+                  className=' align-items-center'>
+                  <>
+                    {getIcons(menu.name)}
+                    {menu.name}
+                  </>
+                </Box>
+              </MenuItem>
             );
           }),
       ];
@@ -443,9 +435,12 @@ const DataTable = ({
             topActionButtons.map((actionBtn, index) => {
               if (actionBtn.name) {
                 return (
-                  <Button
+                  <CustomButton
                     key={index}
                     disabled={!actionBtn.disable ? false : actionBtn.disable}
+                    label={actionBtn.name}
+                    color='primary'
+                    className='p-2'
                     //   onClick={() => {
                     //     if (actionBtn.route) {
                     //       navigate(actionBtn.route);
@@ -453,9 +448,7 @@ const DataTable = ({
                     //       actionBtn.modalfunc();
                     //     }
                     //   }}
-                  >
-                    {actionBtn.name}
-                  </Button>
+                  />
                 );
               } else return <div key={index}></div>;
             })}

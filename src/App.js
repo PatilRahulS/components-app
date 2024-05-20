@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import Grid from './Pages/Grid';
+import Components from './Pages';
 
 function App() {
   return (
     <div className='App'>
-      <Grid />
+      <Components />
     </div>
   );
 }

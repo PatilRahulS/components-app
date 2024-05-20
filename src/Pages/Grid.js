@@ -1,15 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import DataTable from '../Components/MaterialReactTable';
-import { Box } from '@mui/system';
 
 const Grid = () => {
-  const isServerSideFSP = false;
-  const [paging, setPaging] = useState({
-    pageIndex: 0,
-    pageSize: 10,
-  });
-  const [filterValues, setFilterValues] = useState([]);
-
   const data = [
     {
       name: 'John', // key "name" matches `accessorKey` in ColumnDef down below
@@ -40,22 +32,24 @@ const Grid = () => {
     { name: 'Details', route: '/clinic-details' },
   ];
 
-  const topActionButtons = [{ name: 'ADD CLINIC', route: '/add-clinic' }];
+  const topActionButtons = [{ name: 'Add Record', route: null }];
 
   return (
-    <DataTable
-      data={data}
-      columns={columns}
-      customRowActionMenus={rowActionMenues}
-      topActionButtons={topActionButtons}
-      columnOrderInitially={['mrt-row-actions', 'name', 'age']}
-      columnsVisibleInitially={{
-        'mrt-row-actions': true,
-        name: true,
-        age: true,
-      }}
-      type={'user'}
-    />
+    <>
+      <DataTable
+        data={data}
+        columns={columns}
+        customRowActionMenus={rowActionMenues}
+        topActionButtons={topActionButtons}
+        columnOrderInitially={['mrt-row-actions', 'name', 'age']}
+        columnsVisibleInitially={{
+          'mrt-row-actions': true,
+          name: true,
+          age: true,
+        }}
+        type={'user'}
+      />
+    </>
   );
 };
 export default Grid;
