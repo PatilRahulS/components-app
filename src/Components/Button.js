@@ -8,6 +8,7 @@ const propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   key: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {
@@ -18,9 +19,14 @@ const defaultProps = {
   key: '',
 };
 
-const CustomButton = ({ label, color, className, disabled, key }) => {
+const CustomButton = ({ label, color, className, disabled, key, onClick }) => {
   return (
-    <Button className={className} color={color} disabled={disabled} key={key}>
+    <Button
+      className={className}
+      color={color}
+      disabled={disabled}
+      key={key}
+      onClick={onClick}>
       {label}
     </Button>
   );
