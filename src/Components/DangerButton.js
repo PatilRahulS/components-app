@@ -14,10 +14,12 @@ const defaultProps = {
   disabled: false,
 };
 
-const CustomButton = ({ label, color, className, disabled, onClick }) => {
+const DangerButton = ({ label, color, className, disabled, onClick }) => {
   return (
     <CommonButton
       className={className}
+      color='#F06548'
+      bordercolor='#F06548'
       disabled={disabled}
       onClick={onClick}
       caps='true'>
@@ -26,8 +28,8 @@ const CustomButton = ({ label, color, className, disabled, onClick }) => {
   );
 };
 
-CustomButton.defaultProps = defaultProps;
+DangerButton.defaultProps = defaultProps;
 
-CustomButton.propTypes = propTypes;
+DangerButton.propTypes = propTypes;
 
-export default CustomButton;
+export default DangerButton;
