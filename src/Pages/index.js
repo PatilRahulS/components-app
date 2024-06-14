@@ -11,9 +11,13 @@ import { TextBox } from '../Components/FormControls/Input';
 import { Card, CardBody, CardHeader, Container, Form, Row } from 'reactstrap';
 import SelectDropdown from '../Components/FormControls/SelectDropdown';
 import { InputLabel } from '../Components/FormControls/Label';
+import { MultiSelect } from '../Components/FormControls/DualListBox';
+import PushButton from '../Components/FormControls/PushButton';
 
 const Components = () => {
   const [showModal, setShowModal] = useState(false);
+  const [selected, setSelected] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
 
   return (
     <>
@@ -60,9 +64,6 @@ const Components = () => {
                     <div className='form-group col-lg-4 col-md-12 col-sm-12 mt-1'>
                       <TextBox placeholder={'Please enter value here...'} />
                     </div>
-                  </Row>
-
-                  <Row className='mt-3'>
                     <div className='form-group col-lg-4 col-md-12 col-sm-12 mt-1'>
                       <InputLabel title={'Select Value'} />
                       <SelectDropdown
@@ -71,6 +72,23 @@ const Components = () => {
                           { label: 'Op2', value: 2 },
                         ]}
                       />
+                    </div>
+                  </Row>
+
+                  <Row className='mt-3'>
+                    <div className='form-group col-lg-4 col-md-12 col-sm-12 mt-1'>
+                      <MultiSelect
+                        options={[]}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+
+                      <div className='form-group col-lg-4 col-md-12 col-sm-12 mt-1'>
+                        <PushButton
+                          isChecked={isChecked}
+                          setIsChecked={setIsChecked}
+                        />
+                      </div>
                     </div>
                   </Row>
                 </Form>
